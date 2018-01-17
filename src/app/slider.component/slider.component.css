@@ -1,0 +1,28 @@
+
+.slider-wrapper {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+}
+.slider-container {
+	width: 400px;
+}
+mat-slider {
+	width: 100%;
+}
+.inputs-container {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	width: 150px;
+}
+mat-form-field {
+	width: 45%;
+}
+.lock {
+	width: 2em;
+	cursor: default;
+	user-select:none;
+}

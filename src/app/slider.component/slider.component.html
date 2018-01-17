@@ -1,0 +1,40 @@
+
+  <mat-tab-group>
+    <mat-tab *ngFor="let page of Data; let parentIndex = index" label="{{page.name}}">
+
+	 <div class="slider-wrapper" *ngFor="let slider of page.items; let childIndex = index;">
+
+	  <div class="slider-container">
+	    <mat-slider min="0" max="100" step="0.01" 
+		    [(ngModel)]="slider.percent" 
+		    [disabled]="slider.isLocked"
+		    (input)="perChanging($event, parentIndex, childIndex)" >
+	    </mat-slider>
+	  </div>
+	  
+	  <div class="inputs-container">
+	    <mat-form-field>
+	      <input type="number" matInput placeholder="count"
+	      	  name="counts" 
+	   		  value="{{slider.count}}" 
+		      max="{{countCalc(page.count, percentsCalc(page.items))}}" 
+		      min="{{checkIsSingle(page.items) ? countCalc(page.count, percentsCalc(page.items)) : 0}}"
+	   		  (input)="perChanging($event, parentIndex, childIndex)">
+	    </mat-form-field>
+	    <mat-form-field>
+	      <input type="number" matInput placeholder="percent"
+		      value="{{slider.percent}}" [disabled]="slider.isLocked" 
+	      	  name="percents" 
+		      max="{{percentsCalc(page.items)}}" 
+		      min="{{checkIsSingle(page.items) ? percentsCalc(page.items) : 0}}"
+		      (input)="perChanging($event, parentIndex, childIndex)" >
+	    </mat-form-field>
+	  </div>
+
+	  <div class="lock" (click)="setLock(!slider.isLocked, parentIndex, childIndex)">
+	    <mat-icon matSuffix> {{ slider.isLocked ? 'lock' : 'lock_open' }} </mat-icon>
+	  </div>
+
+	 </div>
+    </mat-tab>
+  </mat-tab-group>
